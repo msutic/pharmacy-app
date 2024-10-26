@@ -1,3 +1,4 @@
+import { Children, useState } from 'react';
 import {
   Table,
   TableBody,
@@ -6,9 +7,10 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
+  IconButton,
 } from '@mui/material';
-import { Children, useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import './DataTable.scss';
 
 interface Column {
@@ -59,18 +61,18 @@ const TableDataWrapper = <T extends Record<string, any>>({
                   <TableCell key={column.id}>
                     {column.id === 'action' ? (
                       <>
-                        <Button
+                        <IconButton
                           onClick={() => handleEdit(row.id)}
                           color="primary"
                         >
-                          Edit
-                        </Button>
-                        <Button
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
                           onClick={() => handleDelete(row.id)}
                           color="secondary"
                         >
-                          Delete
-                        </Button>
+                          <DeleteIcon />
+                        </IconButton>
                       </>
                     ) : (
                       row[column.id as keyof T]
