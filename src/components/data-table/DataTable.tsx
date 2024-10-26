@@ -8,6 +8,7 @@ import {
   Paper,
 } from '@mui/material';
 import { Children } from 'react';
+import './DataTable.scss';
 
 interface Column {
   id: string;
@@ -31,9 +32,11 @@ const DataTable = <T extends Record<string, any>>({
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow className="table-header">
               {columns.map((column) => (
-                <TableCell key={column.id}>{column.label}</TableCell>
+                <TableCell key={column.id} className="header-font">
+                  {column.label}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
