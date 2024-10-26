@@ -1,0 +1,31 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2C2C2C;
+    color: #FFFFFF;
+    position: fixed;
+    overflow-y: auto;
+
+    .icon {
+        color: #FFFFFF;
+    }
+
+    .menu-item {
+        color: #FFFFFF;
+
+        &:hover {
+            background-color: #3F51B5;
+        }
+    }
+
+    .title {
+        padding: 16px;
+        text-align: center;
+        font-size: 20px;
+        color: #FFFFFF;
+    }
+
+    .listItemText {
+        margin-left: 8px;
+    }
+}
