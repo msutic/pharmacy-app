@@ -20,17 +20,17 @@ const Products: React.FC = () => {
       name: product.name,
       manufacturerName: product.manufacturer.name,
       price: `${product.price.toFixed(2)} €`,
-      expirationDate: formatDate(product.expirationDate),
+      expirationDate: formatDate(product.expirationDate.toString()),
     }));
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productData = await fetchProducts();
+        const productData: Product[] = await fetchProducts();
         const mappedData = mapProducts(productData);
         setProducts(mappedData);
       } catch (err) {
-        setError('Failed to fetch products');
+        setError('Failed to fetch products.');
       } finally {
         setLoading(false);
       }

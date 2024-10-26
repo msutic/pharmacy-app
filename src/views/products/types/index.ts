@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   manufacturer: Manufacturer;
   price: number;
@@ -12,7 +12,7 @@ export interface Manufacturer {
 }
 
 export interface ProductTableData {
-  id: number;
+  id: string;
   name: string;
   manufacturerName: string;
   price: string;
