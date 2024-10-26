@@ -4,7 +4,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import { Box } from '@mui/material';
 import About from './views/about/About';
 import Statistics from './views/statistics/Statistics';
-import ProductTable from './views/products/ProductsTable';
+import Products from './views/products/Products';
 
 const App: React.FC = () => {
   return (
@@ -12,8 +12,8 @@ const App: React.FC = () => {
       <Sidebar />
       <Box component="main" className="main-content">
         <Routes>
-          <Route path="/" element={<ProductTable />} />
-          <Route path="/products" element={<ProductTable />} />
+          <Route path="/" element={<Products />} />
+          <Route path="/products" element={<Products />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/about" element={<About />} />
         </Routes>

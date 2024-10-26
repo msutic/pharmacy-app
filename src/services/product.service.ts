@@ -1,4 +1,4 @@
-import { Product } from 'src/views/products/types/Product';
+import { Product } from 'src/views/products/types';
 
 const mockProducts = [
   {
@@ -38,6 +38,10 @@ const mockProducts = [
   },
 ];
 
-export const getProducts = (): Product[] => {
-  return mockProducts;
+export const fetchProducts = async (): Promise<Product[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(mockProducts);
+    }, 1000);
+  });
 };

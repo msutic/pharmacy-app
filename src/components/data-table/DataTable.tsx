@@ -6,8 +6,9 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from '@mui/material';
-import { Children } from 'react';
+import { Children, useState } from 'react';
 import './DataTable.scss';
 
 interface Column {
@@ -15,48 +16,74 @@ interface Column {
   label: string;
 }
 
-interface DataTableProps<T> {
+interface TableDataWrapperProps<T> {
   data: T[];
   columns: Column[];
-  title?: string;
 }
 
-const DataTable = <T extends Record<string, any>>({
-  title,
+const TableDataWrapper = <T extends Record<string, any>>({
   data,
   columns,
-}: DataTableProps<T>) => {
+}: TableDataWrapperProps<T>) => {
+  const [tableData, setTableData] = useState<T[]>(data);
+  const handleEdit = (id: number) => {
+    const product = tableData.find((item) => (item as any).id === id);
+    if (product) {
+      console.log('editig product:', product);
+    }
+  };
+
+  const handleDelete = (id: number) => {
+    const updatedData = tableData.filter((item) => (item as any).id !== id);
+    setTableData(updatedData);
+    console.log('deleted product with id:', id);
+  };
+
   return (
-    <>
-      <h2>{title}</h2>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow className="table-header">
-              {columns.map((column) => (
-                <TableCell key={column.id} className="header-font">
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {Children.toArray(
-              data.map((row) => (
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell key={column.id}>
-                      {row[column.id as keyof T]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow className="table-header">
+            {columns.map((column) => (
+              <TableCell key={column.id} className="header-font">
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {Children.toArray(
+            tableData.map((row) => (
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell key={column.id}>
+                    {column.id === 'action' ? (
+                      <>
+                        <Button
+                          onClick={() => handleEdit(row.id)}
+                          color="primary"
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          onClick={() => handleDelete(row.id)}
+                          color="secondary"
+                        >
+                          Delete
+                        </Button>
+                      </>
+                    ) : (
+                      row[column.id as keyof T]
+                    )}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          )}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 
-export default DataTable;
+export default TableDataWrapper;
