@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
-import Sidebar from './features/sidebar/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import { Box } from '@mui/material';
-import Products from './features/products/Products';
-import About from './features/about/About';
-import Statistics from './features/statistics/Statistics';
+import About from './views/about/About';
+import Statistics from './views/statistics/Statistics';
+import Products from './views/products/Products';
 
 const App: React.FC = () => {
   return (
