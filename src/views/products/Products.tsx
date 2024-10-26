@@ -5,6 +5,7 @@ import ProductsTable from './ProductsTable';
 import { fetchProducts } from 'src/services/product.service';
 import { Product, ProductTableData } from './types';
 import './Products.scss';
+import { formatDate } from 'src/utils/dateUtils';
 
 const Products: React.FC = () => {
   const [products, setProducts] = useState<ProductTableData[]>([]);
@@ -14,12 +15,12 @@ const Products: React.FC = () => {
   const handleCreateProduct = () => {};
 
   const mapProducts = (products: Product[]): ProductTableData[] =>
-    products.map((product: any) => ({
+    products.map((product: Product) => ({
       id: product.id,
       name: product.name,
       manufacturerName: product.manufacturer.name,
       price: `${product.price.toFixed(2)} €`,
-      expirationDate: product.expirationDate,
+      expirationDate: formatDate(product.expirationDate),
     }));
 
   useEffect(() => {

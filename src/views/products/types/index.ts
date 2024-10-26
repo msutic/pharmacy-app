@@ -3,7 +3,7 @@ export interface Product {
   name: string;
   manufacturer: Manufacturer;
   price: number;
-  expirationDate: string;
+  expirationDate: Date;
 }
 
 export interface Manufacturer {
