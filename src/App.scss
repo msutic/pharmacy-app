@@ -1,0 +1,13 @@
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #F5F5F5;
+  color: #333333;
+  padding: 16px;
+  height: 100vh;
+  margin-left: 250px;
+}
