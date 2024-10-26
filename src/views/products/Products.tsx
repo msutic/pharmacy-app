@@ -56,7 +56,7 @@ const Products: React.FC = () => {
           color="primary"
           onClick={handleCreateProduct}
         >
-          Create New Product
+          + Create New Product
         </Button>
       </div>
       <ProductsTable data={products} />
