@@ -5,12 +5,12 @@ import {
   ListItemButton,
   Typography,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import './Sidebar.scss';
-
 import MedicationIcon from '@mui/icons-material/Medication';
 import InfoIcon from '@mui/icons-material/Info';
 import BarChartIcon from '@mui/icons-material/BarChart';
+
+import { useNavigate } from 'react-router-dom';
+import './Sidebar.scss';
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
