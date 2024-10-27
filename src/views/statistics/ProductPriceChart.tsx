@@ -10,6 +10,7 @@ import {
   Cell,
 } from 'recharts';
 import { Product } from '../products/types';
+import { generateRandomColor } from 'src/utils/colorUtils';
 
 const CHART_TOP_COUNT = 5;
 
@@ -30,34 +31,21 @@ const ProductPriceChart: React.FC<{ products: Product[] }> = ({ products }) => {
     })
   );
 
-  const colors = [
-    '#8884d8',
-    '#82ca9d',
-    '#ffc658',
-    '#ff7300',
-    '#d0ed57',
-    '#a4de6c',
-    '#8dd1e1',
-    '#ffb3e6',
-    '#ff6666',
-    '#66b3ff',
-  ];
-
   return (
     <BarChart
-      width={1000}
+      width={900}
       height={400}
       data={chartData}
       margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
     >
       <CartesianGrid vertical={false} strokeDasharray="3 3" />
-      <XAxis dataKey="name" angle={-30} textAnchor="end" />
-      <YAxis />
+      <XAxis dataKey="name" fontSize={11} angle={-50} textAnchor="end" />
+      <YAxis fontSize={11} />
       <Tooltip />
       {false && <Legend formatter={() => null} />}
       <Bar dataKey="price" name="" barSize={40} stroke="#000" strokeWidth={2}>
         {chartData.map((_entry, index) => (
-          <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          <Cell key={`cell-${index}`} fill={generateRandomColor()} />
         ))}
       </Bar>
     </BarChart>
