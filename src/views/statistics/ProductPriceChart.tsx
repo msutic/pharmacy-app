@@ -55,7 +55,7 @@ const ProductPriceChart: React.FC<{ products: Product[] }> = ({ products }) => {
       <YAxis />
       <Tooltip />
       {false && <Legend formatter={() => null} />}
-      <Bar dataKey="price" name="" barSize={40}>
+      <Bar dataKey="price" name="" barSize={40} stroke="#000" strokeWidth={2}>
         {chartData.map((_entry, index) => (
           <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
         ))}
