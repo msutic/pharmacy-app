@@ -6,7 +6,7 @@ import { fetchProducts } from 'src/services/product.service';
 import { NewProduct, Product } from './types';
 import './Products.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, ProductsState, setProducts } from './store';
+import { addProduct, deleteProduct, ProductsState, setProducts } from './store';
 import AddProductModal from './AddProductModal';
 
 const Products: React.FC = () => {
@@ -41,7 +41,7 @@ const Products: React.FC = () => {
   };
 
   const handleDeleteProduct = (id: string) => {
-    console.log('Delete product', id);
+    dispatch(deleteProduct(id));
   };
 
   useEffect(() => {
