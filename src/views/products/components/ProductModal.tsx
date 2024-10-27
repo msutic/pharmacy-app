@@ -12,10 +12,10 @@ import {
   MenuItem,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
-import { Product } from './types';
+import { Product } from '../types';
 import { mockManufacturers } from 'src/services/product.service';
 
-interface AddProductModalProps {
+interface ProductModalProps {
   open: boolean;
   onClose: () => void;
   onAddProduct: (data: Product) => void;
@@ -23,21 +23,21 @@ interface AddProductModalProps {
   selectedProduct: Product | null;
 }
 
-interface NewProductForm {
+interface ProductForm {
   name: string;
   manufacturerId: string;
   price: number;
   expirationDate: string;
 }
 
-const ProductModal: React.FC<AddProductModalProps> = ({
+const ProductModal: React.FC<ProductModalProps> = ({
   open,
   onClose,
   onAddProduct,
   onEditProduct,
   selectedProduct = null,
 }) => {
-  const { control, handleSubmit, reset } = useForm<NewProductForm>({
+  const { control, handleSubmit, reset } = useForm<ProductForm>({
     defaultValues: {
       name: '',
       manufacturerId: '',
@@ -59,7 +59,7 @@ const ProductModal: React.FC<AddProductModalProps> = ({
     }
   }, [selectedProduct, reset]);
 
-  const onSubmit = (data: NewProductForm) => {
+  const onSubmit = (data: ProductForm) => {
     const manufacturer = mockManufacturers.find(
       (m) => m.id === data.manufacturerId
     );

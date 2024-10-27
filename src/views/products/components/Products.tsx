@@ -3,7 +3,7 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 
 import ProductsTable from './ProductsTable';
 import { fetchProducts } from 'src/services/product.service';
-import { Product } from './types';
+import { Product } from '../types';
 import './Products.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,7 +12,7 @@ import {
   editProduct,
   ProductsState,
   setProducts,
-} from './store';
+} from '../store';
 import ProductModal from './ProductModal';
 
 const Products: React.FC = () => {

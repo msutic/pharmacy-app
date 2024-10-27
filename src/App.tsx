@@ -4,7 +4,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import { Box } from '@mui/material';
 import About from './views/about/About';
 import Statistics from './views/statistics/Statistics';
-import Products from './views/products/Products';
+import Products from './views/products/components/Products';
 
 const App: React.FC = () => {
   return (
