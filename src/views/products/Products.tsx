@@ -3,34 +3,51 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 
 import ProductsTable from './ProductsTable';
 import { fetchProducts } from 'src/services/product.service';
-import { Product, ProductTableData } from './types';
+import { NewProduct, Product } from './types';
 import './Products.scss';
-import { formatDate } from 'src/utils/dateUtils';
-import { useDispatch } from 'react-redux';
-import { setProducts } from './store';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct, ProductsState, setProducts } from './store';
+import AddProductModal from './AddProductModal';
 
 const Products: React.FC = () => {
   const dispatch = useDispatch();
-  const [tableData, setTableData] = useState<ProductTableData[]>([]);
+  const products = useSelector((state: ProductsState) => state.products);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-  const handleCreateProduct = () => {};
+  const handleCreateProduct = () => {
+    setModalOpen(true);
+  };
 
-  const mapProducts = (products: Product[]): ProductTableData[] =>
-    products.map((product: Product) => ({
-      id: product.id,
-      name: product.name,
-      manufacturerName: product.manufacturer.name,
-      price: `${product.price.toFixed(2)} €`,
-      expirationDate: formatDate(product.expirationDate.toString()),
-    }));
+  const handleAddProduct = (newProduct: NewProduct) => {
+    const productToAdd: Product = {
+      id: Math.random().toString(),
+      name: newProduct.name,
+      manufacturer: {
+        name: newProduct.manufacturerName,
+        id: Math.random().toString(),
+      },
+      price: Number(newProduct.price),
+      expirationDate: new Date(newProduct.expirationDate),
+    };
+
+    dispatch(addProduct(productToAdd));
+    setModalOpen(false);
+  };
+
+  const handleEditProduct = (product: Product) => {
+    console.log('Edit product', product);
+  };
+
+  const handleDeleteProduct = (id: string) => {
+    console.log('Delete product', id);
+  };
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const productData = await fetchProducts();
-        setTableData(mapProducts(productData));
         dispatch(setProducts(productData));
       } catch (err) {
         setError('Failed to fetch products');
@@ -39,8 +56,12 @@ const Products: React.FC = () => {
       }
     };
 
-    getProducts();
-  }, [dispatch]);
+    if (products.length === 0) {
+      getProducts();
+    } else {
+      setLoading(false);
+    }
+  }, [dispatch, products]);
 
   if (loading) {
     return <CircularProgress />;
@@ -62,7 +83,16 @@ const Products: React.FC = () => {
           + Create New Product
         </Button>
       </div>
-      <ProductsTable data={tableData} />
+      <ProductsTable
+        data={products}
+        onEdit={handleEditProduct}
+        onDelete={handleDeleteProduct}
+      />
+      <AddProductModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onAddProduct={handleAddProduct}
+      />
     </div>
   );
 };
