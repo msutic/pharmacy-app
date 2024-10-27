@@ -1,6 +1,4 @@
-// import axios from 'axios';
-
-import { Product } from 'src/views/products/types';
+import { Manufacturer, Product } from 'src/views/products/types';
 
 export const mockProducts: Product[] = [
   {
@@ -38,6 +36,14 @@ export const mockProducts: Product[] = [
     price: 24.99,
     expirationDate: new Date('2024-06-10'),
   },
+];
+
+export const mockManufacturers: Manufacturer[] = [
+  { id: '101', name: 'Manufacturer A' },
+  { id: '102', name: 'Manufacturer B' },
+  { id: '103', name: 'Manufacturer C' },
+  { id: '104', name: 'Manufacturer D' },
+  { id: '105', name: 'Manufacturer E' },
 ];
 
 export const fetchProducts = async (): Promise<Product[]> => {

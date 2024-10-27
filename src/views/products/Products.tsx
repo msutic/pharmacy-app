@@ -3,11 +3,17 @@ import { Button, CircularProgress, Typography } from '@mui/material';
 
 import ProductsTable from './ProductsTable';
 import { fetchProducts } from 'src/services/product.service';
-import { NewProduct, Product } from './types';
+import { Product } from './types';
 import './Products.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, deleteProduct, ProductsState, setProducts } from './store';
-import AddProductModal from './AddProductModal';
+import {
+  addProduct,
+  deleteProduct,
+  editProduct,
+  ProductsState,
+  setProducts,
+} from './store';
+import ProductModal from './ProductModal';
 
 const Products: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,33 +21,35 @@ const Products: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [selectedProduct, setProductToEdit] = useState<Product | null>(null);
 
   const handleCreateProduct = () => {
+    setProductToEdit(null);
     setModalOpen(true);
   };
 
-  const handleAddProduct = (newProduct: NewProduct) => {
-    const productToAdd: Product = {
-      id: Math.random().toString(),
-      name: newProduct.name,
-      manufacturer: {
-        name: newProduct.manufacturerName,
-        id: Math.random().toString(),
-      },
-      price: Number(newProduct.price),
-      expirationDate: new Date(newProduct.expirationDate),
-    };
-
-    dispatch(addProduct(productToAdd));
+  const handleAddProduct = (newProduct: Product) => {
+    dispatch(addProduct(newProduct));
     setModalOpen(false);
   };
 
-  const handleEditProduct = (product: Product) => {
-    console.log('Edit product', product);
+  const openEditModal = (product: Product) => {
+    setProductToEdit(product);
+    setModalOpen(true);
+  };
+
+  const handleEditProduct = (editedProduct: Product) => {
+    dispatch(editProduct(editedProduct));
+    setModalOpen(false);
   };
 
   const handleDeleteProduct = (id: string) => {
     dispatch(deleteProduct(id));
+  };
+
+  const handleCloseModal = () => {
+    setProductToEdit(null);
+    setModalOpen(false);
   };
 
   useEffect(() => {
@@ -85,13 +93,15 @@ const Products: React.FC = () => {
       </div>
       <ProductsTable
         data={products}
-        onEdit={handleEditProduct}
+        onEdit={openEditModal}
         onDelete={handleDeleteProduct}
       />
-      <AddProductModal
+      <ProductModal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={handleCloseModal}
         onAddProduct={handleAddProduct}
+        onEditProduct={handleEditProduct}
+        selectedProduct={selectedProduct}
       />
     </div>
   );
