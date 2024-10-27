@@ -10,6 +10,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  FormHelperText,
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { Product } from '../types';
@@ -37,7 +38,12 @@ const ProductModal: React.FC<ProductModalProps> = ({
   onEditProduct,
   selectedProduct = null,
 }) => {
-  const { control, handleSubmit, reset } = useForm<ProductForm>({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ProductForm>({
     defaultValues: {
       name: '',
       manufacturerId: '',
@@ -108,6 +114,17 @@ const ProductModal: React.FC<ProductModalProps> = ({
           <Controller
             name="name"
             control={control}
+            rules={{
+              required: 'Product name is required',
+              minLength: {
+                value: 2,
+                message: 'Product name must be at least 2 characters long',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Product name must not exceed 50 characters',
+              },
+            }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -115,12 +132,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 fullWidth
                 margin="normal"
                 required
+                error={!!errors.name}
+                helperText={errors.name ? errors.name.message : ''}
               />
             )}
           />
           <Controller
             name="manufacturerId"
             control={control}
+            rules={{ required: 'Manufacturer is required' }}
             render={({ field }) => (
               <FormControl
                 fullWidth
@@ -135,6 +155,7 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   value={field.value || ''}
                   onChange={(e) => field.onChange(e.target.value)}
                   label="Manufacturer"
+                  error={!!errors.manufacturerId}
                 >
                   {mockManufacturers.map((manufacturer) => (
                     <MenuItem key={manufacturer.id} value={manufacturer.id}>
@@ -142,11 +163,23 @@ const ProductModal: React.FC<ProductModalProps> = ({
                     </MenuItem>
                   ))}
                 </Select>
+                {errors.manufacturerId && (
+                  <FormHelperText sx={{ color: 'red' }}>
+                    {errors.manufacturerId.message}
+                  </FormHelperText>
+                )}
               </FormControl>
             )}
           />
           <Controller
             name="price"
+            rules={{
+              required: 'Price is required',
+              min: {
+                value: 0,
+                message: 'Price must be a positive number',
+              },
+            }}
             control={control}
             render={({ field }) => (
               <TextField
@@ -156,12 +189,15 @@ const ProductModal: React.FC<ProductModalProps> = ({
                 fullWidth
                 margin="normal"
                 required
+                error={!!errors.price}
+                helperText={errors.price ? errors.price.message : ''}
               />
             )}
           />
           <Controller
             name="expirationDate"
             control={control}
+            rules={{ required: 'Expiration date is required' }}
             render={({ field }) => (
               <TextField
                 {...field}
@@ -173,6 +209,10 @@ const ProductModal: React.FC<ProductModalProps> = ({
                   shrink: true,
                 }}
                 required
+                error={!!errors.expirationDate}
+                helperText={
+                  errors.expirationDate ? errors.expirationDate.message : ''
+                }
               />
             )}
           />
