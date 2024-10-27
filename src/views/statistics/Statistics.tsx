@@ -3,13 +3,16 @@ import './Statistics.scss';
 import { useSelector } from 'react-redux';
 import { ProductsState } from '../products/store';
 import ManufacturerProductsChart from './ManufacturerProductsChart';
+import { Typography } from '@mui/material';
 
 const Statistics: React.FC = () => {
   const products = useSelector((state: ProductsState) => state.products);
 
   return (
     <>
-      <h1>Statistics</h1>
+      <div className="stats-header">
+        <Typography variant="h4">Statistics</Typography>
+      </div>
       <div className="statistics-container">
         <div className="chart-container">
           <h3 className="chart-title">Price of Medicine</h3>
