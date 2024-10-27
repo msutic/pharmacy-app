@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Typography } from '@mui/material';
 
 import ProductsTable from './ProductsTable';
-import { fetchProducts } from 'src/services/product.service';
+import { fetchProducts } from '@/services/product.service';
 import { Product } from '../types';
 import './Products.scss';
 import { useDispatch, useSelector } from 'react-redux';

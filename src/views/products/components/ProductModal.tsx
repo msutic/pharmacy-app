@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { Product } from '../types';
-import { mockManufacturers } from 'src/services/product.service';
+import { mockManufacturers } from '@/services/product.service';
 
 interface ProductModalProps {
   open: boolean;
