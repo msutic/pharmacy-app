@@ -1,15 +1,18 @@
 import ProductPriceChart from './ProductPriceChart';
-import { mockProducts } from 'src/services/product.service';
 import './Statistics.scss';
+import { useSelector } from 'react-redux';
+import { ProductsState } from '../products/store';
 
 const Statistics: React.FC = () => {
+  const products = useSelector((state: ProductsState) => state.products);
+
   return (
     <>
       <h1>Statistics</h1>
       <div className="statistics-container">
         <div>
           <h3>Price of Medicine</h3>
-          <ProductPriceChart products={mockProducts} />
+          <ProductPriceChart products={products} />
         </div>
         <div>
           <h3>Manufacturer Products Chart</h3>
