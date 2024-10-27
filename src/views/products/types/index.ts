@@ -18,3 +18,10 @@ export interface ProductTableData {
   price: string;
   expirationDate: string;
 }
+
+export interface NewProduct {
+  name: string;
+  manufacturerName: string;
+  price: number;
+  expirationDate: string;
+}
