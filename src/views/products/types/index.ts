@@ -7,7 +7,7 @@ export interface Product {
 }
 
 export interface Manufacturer {
-  id: number;
+  id: string;
   name: string;
 }
 

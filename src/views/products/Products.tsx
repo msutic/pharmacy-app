@@ -6,9 +6,12 @@ import { fetchProducts } from 'src/services/product.service';
 import { Product, ProductTableData } from './types';
 import './Products.scss';
 import { formatDate } from 'src/utils/dateUtils';
+import { useDispatch } from 'react-redux';
+import { setProducts } from './store';
 
 const Products: React.FC = () => {
-  const [products, setProducts] = useState<ProductTableData[]>([]);
+  const dispatch = useDispatch();
+  const [tableData, setTableData] = useState<ProductTableData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,18 +29,18 @@ const Products: React.FC = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const productData: Product[] = await fetchProducts();
-        const mappedData = mapProducts(productData);
-        setProducts(mappedData);
+        const productData = await fetchProducts();
+        setTableData(mapProducts(productData));
+        dispatch(setProducts(productData));
       } catch (err) {
-        setError('Failed to fetch products.');
+        setError('Failed to fetch products');
       } finally {
         setLoading(false);
       }
     };
 
     getProducts();
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return <CircularProgress />;
@@ -59,7 +62,7 @@ const Products: React.FC = () => {
           + Create New Product
         </Button>
       </div>
-      <ProductsTable data={products} />
+      <ProductsTable data={tableData} />
     </div>
   );
 };
