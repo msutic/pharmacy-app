@@ -48,14 +48,14 @@ const ProductPriceChart: React.FC<{ products: Product[] }> = ({ products }) => {
       width={1000}
       height={400}
       data={chartData}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
+      <CartesianGrid vertical={false} strokeDasharray="3 3" />
+      <XAxis dataKey="name" angle={-30} textAnchor="end" />
       <YAxis />
       <Tooltip />
-      <Legend />
-      <Bar dataKey="price" barSize={40}>
+      {false && <Legend formatter={() => null} />}
+      <Bar dataKey="price" name="" barSize={40}>
         {chartData.map((_entry, index) => (
           <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
         ))}
