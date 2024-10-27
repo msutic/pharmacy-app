@@ -11,11 +11,17 @@ import {
 } from 'recharts';
 import { Product } from '../products/types';
 
+const CHART_TOP_COUNT = 5;
+
 const ProductPriceChart: React.FC<{ products: Product[] }> = ({ products }) => {
   const sortedProducts = [...products].sort((a, b) => a.price - b.price);
 
-  const topLeastExpensive = sortedProducts.slice(0, 5);
-  const topMostExpensive = sortedProducts.slice(-5);
+  const topLeastExpensive = sortedProducts.slice(0, CHART_TOP_COUNT);
+  const topMostExpensive = sortedProducts
+    .slice(-CHART_TOP_COUNT)
+    .filter(
+      (product) => !topLeastExpensive.some((least) => least.id === product.id)
+    );
 
   const chartData = [...topLeastExpensive, ...topMostExpensive].map(
     (product) => ({
