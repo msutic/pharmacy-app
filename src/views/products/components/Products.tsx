@@ -30,7 +30,7 @@ const Products: React.FC = () => {
 
   const handleAddProduct = (newProduct: Product) => {
     dispatch(addProduct(newProduct));
-    setModalOpen(false);
+    handleCloseModal();
   };
 
   const openEditModal = (product: Product) => {
@@ -40,7 +40,7 @@ const Products: React.FC = () => {
 
   const handleEditProduct = (editedProduct: Product) => {
     dispatch(editProduct(editedProduct));
-    setModalOpen(false);
+    handleCloseModal();
   };
 
   const handleDeleteProduct = (id: string) => {

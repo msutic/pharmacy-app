@@ -69,18 +69,13 @@ const ProductModal: React.FC<ProductModalProps> = ({
     const manufacturer = mockManufacturers.find(
       (m) => m.id === data.manufacturerId
     );
-    if (!manufacturer) {
-      // better err handling..
-      alert('Manufacturer not found');
-      return;
-    }
 
     const productToSave: Product = {
       id: selectedProduct?.id ?? Math.random().toString(),
       name: data.name,
       manufacturer: {
-        name: manufacturer.name,
-        id: manufacturer.id,
+        name: manufacturer!.name,
+        id: manufacturer!.id,
       },
       price: Number(data.price),
       expirationDate: new Date(data.expirationDate),
