@@ -10,7 +10,7 @@ import {
   Cell,
 } from 'recharts';
 import { Product } from '../products/types';
-import { generateRandomColor } from 'src/utils/colorUtils';
+import { generateRandomColor } from '@/utils/colorUtils';
 
 const CHART_TOP_COUNT = 5;
 

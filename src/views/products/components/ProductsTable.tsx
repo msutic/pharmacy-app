@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { formatDate } from 'src/utils/dateUtils';
+import { formatDate } from '@/utils/dateUtils';
 import './ProductsTable.scss';
 
 interface ProductsTableProps {
@@ -45,10 +45,16 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
               <TableCell>{`${row.price.toFixed(2)} €`}</TableCell>
               <TableCell>{formatDate(row.expirationDate.toString())}</TableCell>
               <TableCell>
-                <IconButton onClick={() => onEdit(row)}>
+                <IconButton
+                  onClick={() => onEdit(row)}
+                  data-testid="edit-product-button"
+                >
                   <EditIcon />
                 </IconButton>
-                <IconButton onClick={() => onDelete(row.id)}>
+                <IconButton
+                  onClick={() => onDelete(row.id)}
+                  data-testid="delete-product-button"
+                >
                   <DeleteIcon />
                 </IconButton>
               </TableCell>

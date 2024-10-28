@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Typography } from '@mui/material';
 
 import ProductsTable from './ProductsTable';
-import { fetchProducts } from 'src/services/product.service';
+import { fetchProducts } from '@/services/product.service';
 import { Product } from '../types';
 import './Products.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ const Products: React.FC = () => {
 
   const handleAddProduct = (newProduct: Product) => {
     dispatch(addProduct(newProduct));
-    setModalOpen(false);
+    handleCloseModal();
   };
 
   const openEditModal = (product: Product) => {
@@ -40,7 +40,7 @@ const Products: React.FC = () => {
 
   const handleEditProduct = (editedProduct: Product) => {
     dispatch(editProduct(editedProduct));
-    setModalOpen(false);
+    handleCloseModal();
   };
 
   const handleDeleteProduct = (id: string) => {

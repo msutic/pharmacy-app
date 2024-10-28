@@ -1,7 +1,7 @@
 import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import { Product } from '../products/types';
-import { generateRandomColor } from 'src/utils/colorUtils';
+import { generateRandomColor } from '@/utils/colorUtils';
 
 interface ManufacturerPieChartProps {
   products: Product[];

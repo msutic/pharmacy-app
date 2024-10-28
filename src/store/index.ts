@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import productsReducer from 'src/views/products/store/index';
+import productsReducer from '@/views/products/store/index';
 
 const persistConfig = {
   key: 'root',
