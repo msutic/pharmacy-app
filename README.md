@@ -20,7 +20,7 @@ A simple SPA for maintenance of pharmacy products built with React. It includes 
 
    ```sh
    git clone https://github.com/msutic/pharmacy-app.git
-   cd pharmacy-dashboard
+   cd pharmacy-app
    ```
 
 2. Install dependencies:
