@@ -55,9 +55,5 @@ export const mockManufacturers: Manufacturer[] = [
 ];
 
 export const fetchProducts = async (): Promise<Product[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(mockProducts);
-    }, 1000);
-  });
+  return Promise.resolve(mockProducts);
 };
