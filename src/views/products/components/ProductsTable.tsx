@@ -31,7 +31,7 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   const [order, setOrder] = useState<'asc' | 'desc'>('asc');
   const [orderBy, setOrderBy] = useState<keyof Product>('name');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleRequestSort = (property: keyof Product) => {
     const isAsc = orderBy === property && order === 'asc';
